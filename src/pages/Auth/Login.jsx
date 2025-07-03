@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useLogin } from "../../hooks/useAuth";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../../store/authSlice";
+import { useToast } from "../../hooks/useToast";
 
 export default function Login() {
   const [email, setEmail] = useState("mehtab.16465@gmail.com");
   const [password, setPassword] = useState("Abcd@123");
-  const [errorMessage, setErrorMessage] = useState("");
 
   const dispatch = useDispatch();
+  const { success, error: showError } = useToast();
 
   const loginMutation = useLogin();
 
@@ -25,23 +26,23 @@ export default function Login() {
   const afterApiCalled = () => {
     if (loginMutation.isSuccess) {
       console.log("Login successful:", loginMutation.data);
+      dispatch(loginSuccess(loginMutation.data));
+      success("Login successful! Welcome back!");
       // You can redirect here or show success message
       // window.location.href = '/dashboard';
     }
 
     if (loginMutation.isError) {
-      setErrorMessage(
+      const errorMsg =
         loginMutation.error?.response?.data?.message ||
-          loginMutation.error?.message ||
-          "Login failed. Please try again."
-      );
+        loginMutation.error?.message ||
+        "Login failed. Please try again.";
+      showError(errorMsg);
     }
-    dispatch(loginSuccess(loginMutation.data));
   };
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setErrorMessage(""); // Clear previous errors
     loginMutation.mutate({ email, password });
   };
 
@@ -62,25 +63,6 @@ export default function Login() {
 
           {/* Login Form */}
           <form onSubmit={handleLogin} className='space-y-4'>
-            {/* Error Message */}
-            {errorMessage && (
-              <div className='alert alert-error'>
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  className='stroke-current shrink-0 h-6 w-6'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    strokeWidth='2'
-                    d='M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z'
-                  />
-                </svg>
-                <span>{errorMessage}</span>
-              </div>
-            )}
             <div className='form-control'>
               <label className='label'>
                 <span className='label-text font-medium'>Email</span>

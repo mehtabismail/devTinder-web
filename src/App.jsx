@@ -3,6 +3,7 @@ import { Login, Profile } from "./pages/INDEX.JS";
 import Body from "./Body.jsx";
 import { QueryProvider } from "./providers/QueryProvider";
 import { ReduxProvider } from "./providers/ReduxProvider";
+import ToastContainer from "./components/ToastContainer";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
               <Route path='/profile' element={<Profile />} />
             </Route>
           </Routes>
+          <ToastContainer />
         </BrowserRouter>
       </QueryProvider>
     </ReduxProvider>
