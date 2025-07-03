@@ -1,2 +1,2 @@
-export { default as Login } from "./Login.jsx";
-export { default as Profile } from "./Profile.jsx";
+export { default as Login } from "./Auth/Login.jsx";
+export { default as Profile } from "./Profile/Profile.jsx";

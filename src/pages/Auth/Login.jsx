@@ -1,15 +1,28 @@
 import React, { useState, useEffect } from "react";
-import { useLogin } from "../hooks/useAuth";
+import { useLogin } from "../../hooks/useAuth";
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "../../store/authSlice";
 
 export default function Login() {
   const [email, setEmail] = useState("mehtab.16465@gmail.com");
   const [password, setPassword] = useState("Abcd@123");
   const [errorMessage, setErrorMessage] = useState("");
 
+  const dispatch = useDispatch();
+
   const loginMutation = useLogin();
 
   // Handle login success/error
   useEffect(() => {
+    afterApiCalled();
+  }, [
+    loginMutation.isSuccess,
+    loginMutation.isError,
+    loginMutation.data,
+    loginMutation.error,
+  ]);
+
+  const afterApiCalled = () => {
     if (loginMutation.isSuccess) {
       console.log("Login successful:", loginMutation.data);
       // You can redirect here or show success message
@@ -23,12 +36,8 @@ export default function Login() {
           "Login failed. Please try again."
       );
     }
-  }, [
-    loginMutation.isSuccess,
-    loginMutation.isError,
-    loginMutation.data,
-    loginMutation.error,
-  ]);
+    dispatch(loginSuccess(loginMutation.data));
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
