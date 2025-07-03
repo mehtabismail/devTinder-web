@@ -1,11 +1,14 @@
 import "./App.css";
-import { NavBar } from "./components";
+import { NavBar, Login } from "./components";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <>
       <NavBar />
-      <h1 class='text-3xl font-bold underline'>Hello world!</h1>
+      <Routes>
+        <Route path='/' element={<Login />} />
+      </Routes>
     </>
   );
 }
