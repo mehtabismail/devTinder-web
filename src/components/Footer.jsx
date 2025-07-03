@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <footer className='footer sm:footer-horizontal footer-center bg-base-100 text-base-content p-4 fixed bottom-0'>
+    <footer className='footer sm:footer-horizontal footer-center bg-transparent p-4 '>
       <aside>
         <p className='mb-2 block text-xs text-[#6B7280]'>
           Copyright © {new Date().getFullYear()} - All right reserved by Mehtab

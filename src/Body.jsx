@@ -4,11 +4,9 @@ import { Outlet } from "react-router-dom";
 
 export default function Body() {
   return (
-    <div>
+    <div className='h-screen overflow-y-scroll hide-scrollbar'>
       <NavBar />
-
       <Outlet />
-
       <Footer />
     </div>
   );

@@ -1,10 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Login, Profile } from "./pages/INDEX.JS";
 import Body from "./Body.jsx";
+import { QueryProvider } from "./providers/QueryProvider";
 
 function App() {
   return (
-    <>
+    <QueryProvider>
       <BrowserRouter basename='/'>
         <Routes>
           <Route path='/' element={<Body />}>
@@ -13,7 +14,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-    </>
+    </QueryProvider>
   );
 }
 
