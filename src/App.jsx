@@ -4,7 +4,7 @@ import Body from "./Body.jsx";
 import { QueryProvider } from "./providers/QueryProvider";
 import { ReduxProvider } from "./providers/ReduxProvider";
 import ToastContainer from "./components/ToastContainer";
-import { Feed, Connections, Register, Requests } from "./pages";
+import { Feed, Connections, Register, Requests } from "./pages/index.js";
 import NotFound from "./components/NotFound.jsx";
 
 function App() {
