@@ -1,8 +1,9 @@
 import axios from "axios";
+import { BASE_URL } from "../config";
 
 // Create axios instance with default config
 const apiClient = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: BASE_URL,
   timeout: 10000,
   withCredentials: true, // Include cookies in requests
   headers: {
@@ -20,7 +21,7 @@ apiClient.interceptors.request.use(
     return config;
   },
   (error) => {
-    return Promise.reject(error);
+    return Promise.reject(error, " ===> error found in api client file");
   }
 );
 

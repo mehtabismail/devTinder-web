@@ -12,8 +12,8 @@ export default function Footer() {
           <span className='font-semibold text-[#6B7280]'>
             About this website:
           </span>{" "}
-          built with React & Next.js (App Router & Server Actions), TypeScript,
-          Tailwind CSS, Framer Motion, React Email & Resend, Vercel hosting.
+          built with React & Vite, JavaScript, Tailwind CSS, Daisy UI, React
+          Email & Resend, Vercel hosting.
         </p>
       </aside>
     </footer>

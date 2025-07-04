@@ -9,7 +9,7 @@ const toastSlice = createSlice({
   initialState,
   reducers: {
     addToast: (state, action) => {
-      const { id, type, message, duration = 5000 } = action.payload;
+      const { id, type, message, duration = 3000 } = action.payload;
       state.toasts.push({
         id,
         type,

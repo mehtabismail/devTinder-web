@@ -3,15 +3,16 @@ import { useLogin } from "../../hooks/useAuth";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../../store/authSlice";
 import { useToast } from "../../hooks/useToast";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("mehtab.16465@gmail.com");
   const [password, setPassword] = useState("Abcd@123");
 
   const dispatch = useDispatch();
-  const { success, error: showError } = useToast();
-
+  const navigate = useNavigate();
   const loginMutation = useLogin();
+  const { success, error: showError } = useToast();
 
   // Handle login success/error
   useEffect(() => {
@@ -27,7 +28,8 @@ export default function Login() {
     if (loginMutation.isSuccess) {
       console.log("Login successful:", loginMutation.data);
       dispatch(loginSuccess(loginMutation.data));
-      success("Login successful! Welcome back!");
+      success(`Login successful! Welcome back!`);
+      navigate("/");
       // You can redirect here or show success message
       // window.location.href = '/dashboard';
     }
@@ -113,10 +115,10 @@ export default function Login() {
           </form>
 
           {/* Divider */}
-          <div className='divider'>OR</div>
+          {/* <div className='divider'>OR</div> */}
 
           {/* Social Login Options */}
-          <div className='space-y-3'>
+          {/* <div className='space-y-3'>
             <button className='btn btn-outline w-full'>
               <svg className='w-5 h-5 mr-2' viewBox='0 0 24 24'>
                 <path
@@ -149,14 +151,17 @@ export default function Login() {
               </svg>
               Continue with GitHub
             </button>
-          </div>
+          </div> */}
 
           {/* Sign Up Link */}
           <div className='text-center mt-6'>
             <span className='text-base-content/60'>
               Don't have an account?{" "}
             </span>
-            <a href='#' className='link link-primary font-medium'>
+            <a
+              onClick={() => navigate("/register")}
+              className='link link-primary font-medium'
+            >
               Sign up for Dev Tinder
             </a>
           </div>

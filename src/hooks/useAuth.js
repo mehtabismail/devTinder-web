@@ -35,3 +35,44 @@ export const useLogin = () => {
     },
   });
 };
+
+// Hook for user signup
+export const useSignup = () => {
+  const queryClient = useQueryClient();
+  const dispatch = useDispatch();
+
+  return useMutation({
+    mutationFn: authService.signup,
+    onSuccess: (data) => {
+      // If signup includes automatic login, handle it like login
+      if (data.user) {
+        dispatch(loginSuccess(data));
+        queryClient.invalidateQueries({ queryKey: queryKeys.auth.user() });
+        queryClient.setQueryData(queryKeys.auth.user(), data.user);
+      }
+    },
+    onError: (error) => {
+      console.error("Signup failed:", error);
+    },
+  });
+};
+
+// Hook for updating user profile
+export const useUpdateProfile = () => {
+  const queryClient = useQueryClient();
+  const dispatch = useDispatch();
+
+  return useMutation({
+    mutationFn: ({ userId, data }) => authService.updateProfile(userId, data),
+    onSuccess: (updatedUser) => {
+      // Update Redux store
+      dispatch({ type: "auth/updateUser", payload: updatedUser });
+      // Invalidate and refetch user data in React Query
+      queryClient.invalidateQueries({ queryKey: queryKeys.auth.user() });
+      queryClient.setQueryData(queryKeys.auth.user(), updatedUser);
+    },
+    onError: (error) => {
+      console.error("Profile update failed:", error);
+    },
+  });
+};
