@@ -6,8 +6,8 @@ import { useToast } from "../../hooks/useToast";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
-  const [email, setEmail] = useState("mehtab.16465@gmail.com");
-  const [password, setPassword] = useState("Abcd@123");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
