@@ -3,14 +3,7 @@ import Body from "./Body.jsx";
 import { QueryProvider } from "./providers/QueryProvider";
 import { ReduxProvider } from "./providers/ReduxProvider";
 import ToastContainer from "./components/ToastContainer";
-import {
-  Feed,
-  Connections,
-  Register,
-  Requests,
-  Login,
-  Profile,
-} from "./pages.js";
+import { Feed, Connections, Register, Requests, Login, Profile } from "./pages";
 import NotFound from "./components/NotFound.jsx";
 
 function App() {
