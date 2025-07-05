@@ -223,6 +223,17 @@ export const useUser = (id) => {
   });
 };
 ```
+## Deployment
+
+- After login into ec2 instance install node init
+- Clone your project from github
+- cd <your_project> & install dependencies
+- npm run build Build your project for production
+- sudo apt update
+- sudo systemctl install nginx
+- sudo systemctl enable nginx
+- sudo scp -r dist/* /var/www/html/ copy from dist folder to /var/www/html/
+- Enable port 80 of your instance from security tab of your instance by adding new inbound rule for port 80 in security groups
 
 ## Best Practices
 
